@@ -18,6 +18,20 @@ router.get("/",async(req,res)=>{
     }
 })
 
+//get cetagories
+router.get("/cets",async(req,res)=>{
+   
+    try {
+        let products=await productmodel.distinct('cetagory')
+        res.send(products)
+           
+     } catch (error) {
+        res.send(error)
+    }
+
+})
+
+
 //get by id
 
 router.get("/:id",async(req,res)=>{

@@ -53,6 +53,14 @@ app.use("/subscriber",subscriberrouter)
 let assetrouter=require("./Routes/Assetroute")
 app.use("/asset",assetrouter)
 
+//--for Meterial router
+let meterialrouter=require("./Routes/meterialroute")
+app.use("/meterial",meterialrouter)
+
+//--for user router
+let usersrouter=require("./Routes/userroute")
+app.use("/users",usersrouter)
+
 //------------port configuration
 
 app.listen(port,()=>{

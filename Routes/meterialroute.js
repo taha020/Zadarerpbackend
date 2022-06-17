@@ -3,6 +3,8 @@ const router=express.Router()
 
 let meterialmodel=require("../Models/meterialmodel")
 
+
+//get all
 router.get("/",async(req,res)=>{
 
     try {
@@ -14,6 +16,52 @@ router.get("/",async(req,res)=>{
      res.send(error)   
     }
 
+})
+
+// Expired items
+
+router.get("/expiredalerts",async(req,res)=>{
+    try {
+        
+        let allmeterials=await meterialmodel.find()
+        let expireditems=[]
+        allmeterials.forEach(element => {
+            let [y,M,d] = element.expierydate.split(/[- :]/);
+            let yourDate =  new Date(y,parseInt(M)-1,parseInt(d)+1).toISOString().slice(0, 10);
+            let newdate= new Date().toISOString().slice(0, 10)
+            let difference=   Math.floor((new Date(yourDate)-new Date(newdate))/864e5)
+
+            if(difference<=element.expiryalert)
+            {
+                expireditems.push(element)
+            }
+        });
+
+       res.send(expireditems)
+
+    } catch (error) {
+        res.send(error)
+    }
+})
+
+//get empty alerts
+
+router.get("/emptyelerts",async(req,res)=>{
+    try {
+
+        let allitems=await meterialmodel.find()
+        let emptyitems=[]
+        allitems.forEach(element=>{
+            if(element.quantity<element.emptyalert)
+            {
+                emptyitems.push(element)
+            }
+        })
+        res.send(emptyitems)
+        
+    } catch (error) {
+        res.send(error)
+    }
 })
 
 //get by id
@@ -40,11 +88,13 @@ router.post("/",async(req,res)=>{
       let newmeterial= new meterialmodel({
           name:req.body.name,
           discription:req.body.discription,
-          vendor:req.body.vendor,
           price:req.body.price,
           quantity:req.body.quantity,  
-          datedatepurchased:newdate,
+          datepurchased:newdate,
+          expiryalert: req.body.expiryalert,
+          emptyalert: req.body.emptyalert,
           expierydate:req.body.expierydate
+          
       })
 
       let a1=await newmeterial.save()
@@ -84,3 +134,5 @@ router.patch("/:id",async(req,res)=>{
     }
      
    })
+
+   module.exports=router

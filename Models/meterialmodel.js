@@ -11,10 +11,6 @@ let meterialschema=new mongoose.Schema({
         type:String,
         required:true
     },
-    vendor:{
-        type:String,
-        required:true
-    },
     price:{
         type:Number,
         required:true
@@ -23,12 +19,21 @@ let meterialschema=new mongoose.Schema({
         type:Number,
         required:true
     },
+    
     datepurchased:{
-        type:Date,
+        type:String,
+        required:true
+    },
+    expiryalert:{
+        type:Number,
+        required:true
+    },
+    emptyalert:{
+        type:Number,
         required:true
     },
     expierydate:{
-        type:Date,
+        type:String,
         required:true
     }
     

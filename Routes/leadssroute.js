@@ -25,16 +25,19 @@ router.get('/monthratio', async(req,res) =>{
         
         current.setMonth(current.getMonth()+1);
         current = current.toLocaleString('default', { month: 'long' });
+        console.log(current)
        
 
 
        leads.forEach(element => {
           let d= element.date.toString().split(' ')
           
-           if(d[1]==current){curr++}
+           if(d[1]==current.slice(0,3)){curr++ 
+            console.log("found")}
            else if(d[1]==previousMonth.slice(0,3)){prev++}
        });
        let count=[curr,prev]
+       console.log(count)
       res.send(count)
        
 
