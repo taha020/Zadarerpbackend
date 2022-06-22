@@ -4,8 +4,24 @@ let router=express.Router()
 let productmodel=require("../Models/productmodel")
 
 
-
 //---Get
+
+//get product names
+
+router.get("/productnames",async(req,res)=>{
+   
+    try {
+        let products=await productmodel.find({}, {
+            name: 1
+          });
+ 
+
+        res.send(products)    
+     } catch (error) {
+        res.send(error)
+    }
+})
+
 
 // get all
 router.get("/",async(req,res)=>{

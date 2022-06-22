@@ -61,6 +61,19 @@ app.use("/meterial",meterialrouter)
 let usersrouter=require("./Routes/userroute")
 app.use("/users",usersrouter)
 
+//--for voucher
+let voucherrouter=require("./Routes/voucherroute")
+app.use("/voucher",voucherrouter)
+
+//--for Discounts
+let discountroute=require("./Routes/discountroute")
+app.use("/discount",discountroute)
+
+//--For pop-up promotions
+let popups=require("./Routes/popuppromotionsroute")
+app.use("/popups",popups)
+
+
 //------------port configuration
 
 app.listen(port,()=>{
