@@ -57,10 +57,6 @@ app.use("/asset",assetrouter)
 let meterialrouter=require("./Routes/meterialroute")
 app.use("/meterial",meterialrouter)
 
-//--for user router
-let usersrouter=require("./Routes/userroute")
-app.use("/users",usersrouter)
-
 //--for voucher
 let voucherrouter=require("./Routes/voucherroute")
 app.use("/voucher",voucherrouter)
@@ -73,6 +69,33 @@ app.use("/discount",discountroute)
 let popups=require("./Routes/popuppromotionsroute")
 app.use("/popups",popups)
 
+//--For Auto emails
+let autoemails=require("./Routes/autoemailrouteroute")
+app.use("/autoemails",autoemails)
+
+//--For Employees Data
+let emp=require("./Routes/Employeesroute")
+app.use("/employees",emp)
+
+//--For Employees Attendence
+let empattendence=require("./Routes/Attendence")
+app.use("/attendence",empattendence)
+
+//--For Libility 
+let libilityroute=require("./Routes/libilityroute")
+app.use("/libility",libilityroute)
+
+//--For Contacts 
+let contactroute=require("./Routes/contactroute")
+app.use("/contact",contactroute)
+
+//--For Contacts 
+let users=require("./Routes/usersroute")
+app.use("/user",users)
+
+//--For Expense 
+let expense=require("./Routes/Expenshesheetroute")
+app.use("/expensesheet",expense)
 
 //------------port configuration
 

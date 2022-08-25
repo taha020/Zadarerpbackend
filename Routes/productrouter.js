@@ -4,7 +4,26 @@ let router=express.Router()
 let productmodel=require("../Models/productmodel")
 
 
-//---Get
+//---Get Product for website
+
+router.get("/menue",async(req,res)=>{
+   
+    try {
+       
+        let cetagories = await productmodel.distinct('cetagory')
+        let menue=[]  
+        for (let index = 0; index < cetagories.length; index++) {
+       
+            menue[index] = await productmodel.find({ cetagory:cetagories[index] })
+            
+           }  
+        res.send(menue)    
+       
+     } catch (error) {
+        res.send(error)
+    }
+})
+
 
 //get product names
 
@@ -15,7 +34,6 @@ router.get("/productnames",async(req,res)=>{
             name: 1
           });
  
-
         res.send(products)    
      } catch (error) {
         res.send(error)

@@ -31,6 +31,10 @@ let salesschema=new mongoose.Schema({
         type:Date,
         require:true
     },
+    totalprice:{
+        type:Number,
+        require:true
+    },
     status:{
         type:String,
         required:false,

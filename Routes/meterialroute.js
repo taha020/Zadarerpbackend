@@ -1,7 +1,27 @@
 const express=require('express')
 const router=express.Router()
-
+let converter = require("json-2-csv");
 let meterialmodel=require("../Models/meterialmodel")
+
+// Export Data
+
+router.get('/export', async(req,res) =>{
+    try {
+
+        let datatoexport=await meterialmodel.find()
+        let data=JSON.parse(JSON.stringify(datatoexport));
+        converter.json2csv(data , (err, csv) => {
+            if (err) {
+                console.log(err);
+            }    
+            // print CSV string
+            res.send(csv);
+        });
+
+    } catch (err) {
+        res.send(err)
+    }   
+})
 
 
 //get all

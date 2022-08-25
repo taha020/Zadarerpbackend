@@ -4,6 +4,8 @@ const app = express()
 const router=express.Router()
 const fbmodel=require("../Models/fedbackmodel")
 
+let subscribermodel=require("../Models/subscribermodel")
+
 
 router.get('/monthratio', async(req,res) =>{
 
@@ -109,6 +111,13 @@ router.post('/',async(req,res)=>{
         })
 
         const a1=await feedbacknew.save()
+
+        let newsubscriber= new subscribermodel({
+            name:req.body.name,
+            email:req.body.email
+        })
+        let a2=await newsubscriber.save()
+
         res.send(a1)
 
     } catch (err) {

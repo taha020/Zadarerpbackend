@@ -1,6 +1,28 @@
 const express=require("express")
 const router=express.Router()
 const asssetsmodel=require("../Models/assetmodel")
+let converter = require("json-2-csv");
+
+// Export Data
+
+router.get('/export', async(req,res) =>{
+    try {
+
+        let datatoexport=await asssetsmodel.find()
+        let data=JSON.parse(JSON.stringify(datatoexport));
+        converter.json2csv(data , (err, csv) => {
+            if (err) {
+                console.log(err);
+            }    
+            // print CSV string
+            res.send(csv);
+        });
+
+    } catch (err) {
+        res.send(err)
+    }   
+})
+
 
 
 //get current month and year

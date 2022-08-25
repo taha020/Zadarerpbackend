@@ -3,6 +3,7 @@ const app=express()
 const router=express.Router()
 const leadsmodel=require("../Models/leadsmodel")
 
+let subscribermodel=require("../Models/subscribermodel")
 
 //------------routing
 
@@ -11,8 +12,7 @@ const leadsmodel=require("../Models/leadsmodel")
 router.get('/monthratio', async(req,res) =>{
 
     try {
-         
-   
+           
         const leads=await leadsmodel.find()
        
         let prev=0
@@ -112,6 +112,13 @@ router.post("/",async(req,res)=>{
         })
 
         let a1=await newlead.save()
+
+        let newsubscriber= new subscribermodel({
+            name:req.body.name,
+            email:req.body.email
+        })
+        let a2=await newsubscriber.save()
+
         res.send(a1)
     } catch (error) {
         res.send(error)
